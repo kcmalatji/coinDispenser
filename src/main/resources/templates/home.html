@@ -16,24 +16,21 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Coin Dispenser</a>
+				<a class="navbar-brand" href="/">Coin Dispenser</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
+				<li class="active"><a href="/">Home</a></li>
 
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-						Login</a></li>
 			</ul>
 		</div>
 	</nav><!-- 
 
 	<p th:text="'Hello, ' + ${name} + '!'" /> -->
 	<div class="container">
-		<h1>Welcome Home</h1>
+		<h1>Welcome to Coin Dispenser System</h1>
+		
+	
+		<p th:text="'minimum combination is , ' + ${session.response} + '!'" />
 	</div>
 	
 

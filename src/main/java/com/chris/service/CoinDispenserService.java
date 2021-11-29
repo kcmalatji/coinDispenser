@@ -2,6 +2,8 @@ package com.chris.service;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.boot.json.GsonJsonParser;
 
 import com.chris.model.CoinDispenserRequest;
@@ -18,46 +20,29 @@ import okhttp3.Response;
 public class CoinDispenserService {
 	private final OkHttpClient httpClient = new OkHttpClient();
 
-	public void sendGet() throws Exception {
+	public void sendPost(String number, HttpSession session) throws IOException {
 
-		Request request = new Request.Builder().url("http://localhost:8080/v1/api/getcoins").build();
-//				.addHeader("custom-key", "mkyong") // add request headers
-//				.addHeader("User-Agent", "OkHttp Bot").build();
-
-		try (Response response = httpClient.newCall(request).execute()) {
-
-			if (!response.isSuccessful())
-				throw new IOException("Unexpected code " + response);
-
-			// Get response body
-			System.out.println(response.body().string());
-		}
-
-	}
-
-	public void sendPost(String number) throws Exception {
-
-		// form parameters
-		RequestBody formBody = new FormBody.Builder().add("number", number).build();
-		CoinDispenserRequest newAM = new CoinDispenserRequest();
-		newAM.setAmount(number);
-
+		CoinDispenserRequest request = new CoinDispenserRequest();
+		request.setAmount(number);
+		int httpResponse = 0;
 		Gson gs = new Gson();
-		gs.toJson(newAM);
-		RequestBody body = RequestBody.create(MediaType.parse("application/json"), gs.toJson(newAM));
+		gs.toJson(request);
+		RequestBody body = RequestBody.create(MediaType.parse("application/json"), gs.toJson(request));
 
-		Request request = new Request.Builder().url("http://localhost:8080/v1/api/getcoins")
-				.addHeader("User-Agent", "OkHttp Bot").post(body).build();
+		Request httpRequest = new Request.Builder().url("http://localhost:8080/v1/api/getcoins").post(body).build();
 
 		System.out.println("request " + request);
+		
+	     try (Response response = httpClient.newCall(httpRequest).execute()) {
 
-		try (Response response = httpClient.newCall(request).execute()) {
+	            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
-			System.out.println(response.body().string());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
+	            // Get response body
+	            String  responseBody=response.body().string();
+	            session.setAttribute("response", responseBody);
+	            System.out.println("Response Body :" + responseBody);
+	            response.close();
+	        }
 	}
 
 }

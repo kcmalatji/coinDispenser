@@ -22,22 +22,14 @@
 				<li class="active"><a href="#">Home</a></li>
 
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-						Login</a></li>
-			</ul>
+		
 		</div>
 	</nav><!-- 
 
 	<p th:text="'Hello, ' + ${name} + '!'" /> -->
 	<div class="container">
-		<form action="/getcoins" th:action="@{/getcoins}" th:object="${amountRequest}" method="post">
+		<form action="/getcoins" th:action="@{/getcoins}" th:object="${coinDispenserRequest}" method="post">
 			<div class="form-group">
-				<label for="amount">Enter Amout:</label> 
-			
-				<input  class="form-control" type="number" th:field="*{amount}" placeholder="amount" id="amount">
 				<label for="amount">Enter Amout:</label> 
 			
 				<input  class="form-control" type="number" th:field="*{amount}" placeholder="amount" id="amount">
