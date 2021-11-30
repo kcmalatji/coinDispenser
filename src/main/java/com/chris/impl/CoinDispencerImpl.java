@@ -35,8 +35,4 @@ public class CoinDispencerImpl {
         });
         return minimumCache.get(number);
     }
-    public static void main(String[] args) {
-        int denominators[] = {1,2, 3};
-        System.out.println(getMinimum(denominators, 5));
-    }
 }

@@ -20,11 +20,8 @@ import okhttp3.Response;
 public class CoinDispenserService {
 	private final OkHttpClient httpClient = new OkHttpClient();
 
-	public void sendPost(String number, HttpSession session) throws IOException {
+	public void sendPost(CoinDispenserRequest request, HttpSession session) throws IOException {
 
-		CoinDispenserRequest request = new CoinDispenserRequest();
-		request.setAmount(number);
-		int httpResponse = 0;
 		Gson gs = new Gson();
 		gs.toJson(request);
 		RequestBody body = RequestBody.create(MediaType.parse("application/json"), gs.toJson(request));
@@ -40,7 +37,7 @@ public class CoinDispenserService {
 	            // Get response body
 	            String  responseBody=response.body().string();
 	            session.setAttribute("response", responseBody);
-	            System.out.println("Response Body :" + responseBody);
+	            System.out.println("Minimum Combination is:" + responseBody);
 	            response.close();
 	        }
 	}

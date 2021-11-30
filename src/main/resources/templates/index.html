@@ -34,6 +34,11 @@
 			
 				<input  class="form-control" type="number" th:field="*{amount}" placeholder="amount" id="amount">
 			</div>
+				<div class="form-group">
+				<label for="amount">Enter Denominators:</label> 
+			
+				<input  class="form-control" type="text" th:field="*{denominators}" placeholder="separate the numbers with a comma example  1,2,3,4" id="amount">
+			</div>
 			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
 	</div>

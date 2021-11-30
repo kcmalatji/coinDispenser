@@ -4,11 +4,8 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.chris.model.CoinDispenserRequest;
 import com.chris.service.CoinDispenserService;
@@ -23,12 +20,15 @@ public class CoinDispenserController {
 	}
 
 	@PostMapping("/getcoins")
-	public String getHome(@PathParam(value = "") String amount, Model model, HttpSession session) {
+	public String getHome(@PathParam(value = "") int amount, @PathParam(value = "") String denominators,HttpSession session) {
 
 		CoinDispenserService cvs = new CoinDispenserService();
-
+		
+		CoinDispenserRequest request = new CoinDispenserRequest();
+		request.setAmount(amount);
+		request.setDenominators(denominators);
 		try {
-			cvs.sendPost(amount, session);
+			cvs.sendPost(request, session);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
